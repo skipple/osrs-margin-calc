@@ -22,6 +22,14 @@ function parceLetter(num){
       return parseFloat(num);
 }
 
+function calculateROI(margin, buy_price){
+    roi = (margin / buy_price * 100).toFixed(2)
+    roi = roi.toLocaleString("en-US");
+    roi = roi + "%";
+    return roi;
+
+}
+
 function calculate()
 {
     buy_price = parceLetter(document.getElementById("bprice").value);
@@ -32,7 +40,7 @@ function calculate()
         tax = calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
         total = margin * volume;
-        roi = Math.round((margin / buy_price * 100) / 100) + "%";
+        roi = calculateROI(margin, buy_price);
 
         tax_str = tax.toLocaleString("en-US");
         margin_str = margin.toLocaleString("en-US");

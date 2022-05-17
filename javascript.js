@@ -1,6 +1,7 @@
 function calculateTax(sell_price)
 {
-    tax = Math.round(sell_price * 0.01);
+    if(sell_price >99) tax = Math.round(sell_price * 0.01);
+    else tax = 0; 
     return tax;
 }
 
@@ -22,11 +23,37 @@ function parceLetter(num){
       return parseFloat(num);
 }
 
-function calculateROI(margin, buy_price){
-    roi = (margin / buy_price * 100).toFixed(2)
-    roi = roi + "%";
-    return roi;
+function pickHex(color1, color2, weight) {
+  var w1 = weight;
+  var w2 = 1 - w1;
+  var rgb = [Math.round(color1[0] * w1 + color2[0] * w2),
+      Math.round(color1[1] * w1 + color2[1] * w2),
+      Math.round(color1[2] * w1 + color2[2] * w2)];
+  rgb = "rgb(" + rgb + ")"
+  return rgb;
+}
 
+function setcolorROI(roi){
+
+    if(roi > 3) document.getElementById("roi_output").style.color = "rgb(0,250,0)";
+    else if(roi > 0) {;
+      green = [0,255,0]
+      red = [255,0,0];
+      weight = roi * 33.3 / 100;
+      console.log(weight);
+      color = pickHex(green,red,weight);
+      console.log(color);
+      document.getElementById("roi_output").style.color = color;
+    }
+    else document.getElementById("roi_output").style.color = "rgb(250,0,0)";
+
+}
+
+function calculateROI(margin, buy_price){
+    roi = (margin / buy_price * 100)
+    setcolorROI(roi)
+    roi = roi.toFixed(2) + "%";
+    return roi;
 }
 
 function calculate()
@@ -52,7 +79,7 @@ function calculate()
         margin_str = margin.toLocaleString("en-US");
         total_str = total.toLocaleString("en-US");         
 
-        document.getElementById("tax_output").innerHTML = tax_str;
+        document.getElementById("tax_output").innerHTML = -Math.abs(tax_str);
         document.getElementById("margin_output").innerHTML = margin_str;
         document.getElementById("total_output").innerHTML = total_str;
         document.getElementById("roi_output").innerHTML = roi;

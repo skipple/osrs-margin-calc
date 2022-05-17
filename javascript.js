@@ -19,9 +19,14 @@ function calculate()
     if(buy_price !== "" && sell_price !== ""){
         tax = calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
+        total = margin * volume;
 
-        document.getElementById("tax_output").innerHTML = tax;
-        document.getElementById("margin_output").innerHTML = margin;
-        document.getElementById("total_output").innerHTML = margin * volume;
+        tax_str = tax.toLocaleString("en-US");
+        margin_str = margin.toLocaleString("en-US");
+        total_str = total.toLocaleString("en-US");         
+
+        document.getElementById("tax_output").innerHTML = tax_str;
+        document.getElementById("margin_output").innerHTML = margin_str;
+        document.getElementById("total_output").innerHTML = total_str;
     }
 }

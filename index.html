@@ -19,40 +19,40 @@
     <div class="body container">
         <div class="input container">
             <div class="field">
-                <span class="buy text">Buy Price:</span>
+                <span class="buy input text">Buy Price:</span>
                 <input type="textbox" oninput="calculate()" id="bprice">
             </div>
 
             <div class="field">
-                <span class="sell text">Sell Price:</span>
+                <span class="sell input text">Sell Price:</span>
                 <input type="textbox" oninput="calculate()" id="sprice">
             </div>
 
             <div class="field">
-                <span class="volume text">Volume:</span>
+                <span class="volume input text">Volume:</span>
                 <input type="textbox" oninput="calculate()" id="volume" value="1">
             </div>
         </div>
 
         <div class="output container">
             <div class="field">
-                <span class="tax result text">Tax: </span>
-                <span type="textbox" id="tax_output"></span>
+                <span class="outputText">Tax: </span>
+                <span type="textbox" class="outputResult" id="tax_output">0</span>
             </div>
 
             <div class="field">
-                <span class="margin result text">Margin: </span>
-                <span type="textbox" id="margin_output"></span>
+                <span class="outputText">Margin: </span>
+                <span type="textbox" class="outputResult" id="margin_output">0</span>
             </div>
 
             <div class="field">
-                <span class="roi result text">ROI: </span>
-                <span type="textbox" id="roi_output"></span>
+                <span class="outputText">ROI: </span>
+                <span type="textbox" class="outputResult" id="roi_output">0.00%</span>
             </div>
 
             <div class="field">
-                <span class="margin result text">Total: </span>
-                <span type="textbox" id="total_output"></span> 
+                <span class="outputText">Total: </span>
+                <span type="textbox" class="outputResult" id="total_output">0</span> 
             </div>
         </div>
     </div>

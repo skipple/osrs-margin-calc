@@ -35,7 +35,7 @@ function calculate()
     sell_price = parceLetter(document.getElementById("sprice").value);
     volume = parceLetter(document.getElementById("volume").value);
 
-    if(buy_price !== "" && sell_price !== ""){
+    if(buy_price.length !== 0 && sell_price.length !== 0){
         tax = calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
         total = margin * volume;

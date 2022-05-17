@@ -1,14 +1,15 @@
 body {
-    margin: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #1F2937;
+    min-width: 400px;
 }
 
 
 .header{
     color: #F9FAF8;
     font-weight: 900;
-    margin: 24px;
+    margin: 12px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,17 +31,11 @@ body {
 }
 
 .input{
-
+    font-weight: bold;
+    font-size: large;
 }
 
-.output{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 20px;
-    font-size: x-large;
-}
+
 
 .field{
     display: flex;
@@ -70,7 +65,21 @@ span[type=textbox] {
     margin: 6px;
 }
 
-.result{
+.output{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 30px;
+    font-size: x-large;
+    min-width: 350px;
+}
+
+.outputText{
     font-weight: bold;
     min-width: 20px;
+    margin: 6px;
+}
+
+.outputResult{ 
+
 }

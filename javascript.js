@@ -35,7 +35,14 @@ function calculate()
     sell_price = parceLetter(document.getElementById("sprice").value);
     volume = parceLetter(document.getElementById("volume").value);
 
-    if(buy_price.length !== 0 && sell_price.length !== 0){
+    if(isNaN(buy_price) || isNaN(sell_price))
+    {
+      document.getElementById("tax_output").innerHTML = 0;
+      document.getElementById("margin_output").innerHTML = 0;
+      document.getElementById("total_output").innerHTML = 0;
+      document.getElementById("roi_output").innerHTML = "0.00%";
+    }
+    else {
         tax = calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
         total = margin * volume;

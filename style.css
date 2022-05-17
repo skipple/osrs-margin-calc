@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1F2937;
+}
+
+
+.header{
+    color: #F9FAF8;
+    font-weight: 900;
+    margin: 24px;
+}
+
+.body {
+    color: #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 70px;
+    padding-bottom: 100px;
+}

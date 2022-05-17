@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>OSRS Margin Calculator</title>
+</head>
+<body>
+    <div class="header container">
+        <h1>OSRS Margin Calculator</h1>
+    </div>
+
+    <div class="body container">
+        <div class="container">
+            <span class="buy text">Buy Price:</span>
+            <input type="number" oninput="calculate()" id="bprice">
+        </br>
+            <span class="sell text">Sell Price:</span>
+            <input type="number" oninput="calculate()" id="sprice">
+        </br>
+            <button type="button" onclick="calculate()">Text</button>
+        </br>
+            <span class="tax text">Tax:</span>
+            <div type="textbox" id="tax_output"></div>
+        </br>
+            <span class="margin text">Margin:</span>
+            <div type="textbox" id="margin_output"></div>
+        </div>    
+    </div>
+
+</body>
+<script src="javascript.js"></script>
+</html>

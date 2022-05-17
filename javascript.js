@@ -24,7 +24,6 @@ function parceLetter(num){
 
 function calculateROI(margin, buy_price){
     roi = (margin / buy_price * 100).toFixed(2)
-    roi = roi.toLocaleString("en-US");
     roi = roi + "%";
     return roi;
 

@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="header container">
+        <img class="coins" src="/img/coins.png">
         <h1>OSRS Margin Calculator</h1>
     </div>
 
@@ -29,28 +30,28 @@
 
             <div class="field">
                 <span class="volume text">Volume:</span>
-                <input type="texbox" oninput="calculate()" id="volume" value="1">
+                <input type="textbox" oninput="calculate()" id="volume" value="1">
             </div>
         </div>
 
         <div class="output container">
             <div class="field">
-                <span class="tax text">Tax: </span>
+                <span class="tax result text">Tax: </span>
                 <span type="textbox" id="tax_output"></span>
             </div>
 
             <div class="field">
-                <span class="margin text">Margin: </span>
+                <span class="margin result text">Margin: </span>
                 <span type="textbox" id="margin_output"></span>
             </div>
 
             <div class="field">
-                <span class="roi text">ROI: </span>
+                <span class="roi result text">ROI: </span>
                 <span type="textbox" id="roi_output"></span>
             </div>
 
             <div class="field">
-                <span class="margin text">Total: </span>
+                <span class="margin result text">Total: </span>
                 <span type="textbox" id="total_output"></span> 
             </div>
         </div>

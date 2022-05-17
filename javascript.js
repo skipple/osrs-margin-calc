@@ -20,7 +20,7 @@ function calculate()
         tax = calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
 
-        document.getElementById("tax_output").innerHTML = "(",tax,")";
+        document.getElementById("tax_output").innerHTML = tax;
         document.getElementById("margin_output").innerHTML = margin;
         document.getElementById("total_output").innerHTML = margin * volume;
     }

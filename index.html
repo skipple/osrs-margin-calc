@@ -16,21 +16,39 @@
     </div>
 
     <div class="body container">
-        <div class="container">
-            <span class="buy text">Buy Price:</span>
-            <input type="number" oninput="calculate()" id="bprice">
-        </br>
-            <span class="sell text">Sell Price:</span>
-            <input type="number" oninput="calculate()" id="sprice">
-        </br>
-            <button type="button" onclick="calculate()">Text</button>
-        </br>
-            <span class="tax text">Tax:</span>
-            <div type="textbox" id="tax_output"></div>
-        </br>
-            <span class="margin text">Margin:</span>
-            <div type="textbox" id="margin_output"></div>
-        </div>    
+        <div class="input container">
+            <div class="field">
+                <span class="buy text">Buy Price:</span>
+                <input type="number" oninput="calculate()" id="bprice">
+            </div>
+
+            <div class="field">
+                <span class="sell text">Sell Price:</span>
+                <input type="number" oninput="calculate()" id="sprice">
+            </div>
+
+            <div class="field">
+                <span class="volume text">Volume:</span>
+                <input type="number" oninput="calculate()" id="volume" value="1">
+            </div>
+        </div>
+
+        <div class="output container">
+            <div class="field">
+                <span class="tax text">Tax: </span>
+                <span type="textbox" id="tax_output"></span>
+            </div>
+
+            <div class="field">
+                <span class="margin text">Margin: </span>
+                <span type="textbox" id="margin_output"></span>
+            </div>
+
+            <div class="field">
+                <span class="margin text">Total: </span>
+                <span type="textbox" id="total_output"></span> 
+            </div>
+        </div>
     </div>
 
 </body>

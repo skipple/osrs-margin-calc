@@ -2,6 +2,7 @@ function calculateTax(sell_price)
 {
     if(sell_price >99) tax = Math.round(sell_price * 0.01);
     else tax = 0; 
+    console.log(tax);
     return tax;
 }
 
@@ -40,9 +41,7 @@ function setcolorROI(roi){
       green = [0,255,0]
       red = [255,0,0];
       weight = roi * 33.3 / 100;
-      console.log(weight);
       color = pickHex(green,red,weight);
-      console.log(color);
       document.getElementById("roi_output").style.color = color;
     }
     else document.getElementById("roi_output").style.color = "rgb(250,0,0)";
@@ -54,6 +53,19 @@ function calculateROI(margin, buy_price){
     setcolorROI(roi)
     roi = roi.toFixed(2) + "%";
     return roi;
+}
+
+function setCoinImage(total){
+  if(total > 1000000) document.getElementById('coins').src="img/coins/coins_8.png";
+  else if(total > 500000) document.getElementById('coins').src="img/coins/coins_7.png";
+  else if(total > 250000) document.getElementById('coins').src="img/coins/coins_6.png";
+  else if(total > 100000) document.getElementById('coins').src="img/coins/coins_5.png";
+  else if(total > 50000) document.getElementById('coins').src="img/coins/coins_5.png";
+  else if(total > 20000) document.getElementById('coins').src="img/coins/coins_4.png";
+  else if(total > 10000) document.getElementById('coins').src="img/coins/coins_3.png";
+  else if(total > 1000) document.getElementById('coins').src="img/coins/coins_2.png";
+  else if(total >= 1) document.getElementById('coins').src="img/coins/coins_1.png";
+  return;
 }
 
 function calculate()
@@ -70,18 +82,21 @@ function calculate()
       document.getElementById("roi_output").innerHTML = "0.00%";
     }
     else {
-        tax = calculateTax(sell_price);
+        tax = 0 - calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
         total = margin * volume;
         roi = calculateROI(margin, buy_price);
 
         tax_str = tax.toLocaleString("en-US");
         margin_str = margin.toLocaleString("en-US");
-        total_str = total.toLocaleString("en-US");         
+        total_str = total.toLocaleString("en-US"); 
+        
 
-        document.getElementById("tax_output").innerHTML = -Math.abs(tax_str);
+        document.getElementById("tax_output").innerHTML = tax_str;
         document.getElementById("margin_output").innerHTML = margin_str;
         document.getElementById("total_output").innerHTML = total_str;
         document.getElementById("roi_output").innerHTML = roi;
+
+        setCoinImage(total);
     }
 }

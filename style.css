@@ -85,3 +85,8 @@ span[type=textbox] {
 .outputResult{ 
 
 }
+
+.coins_img{
+    height: 45px;
+    margin-left: auto;
+}

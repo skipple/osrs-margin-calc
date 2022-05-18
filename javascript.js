@@ -65,6 +65,7 @@ function setCoinImage(total){
   else if(total > 10000) document.getElementById('coins').src="img/coins/coins_3.png";
   else if(total > 1000) document.getElementById('coins').src="img/coins/coins_2.png";
   else if(total >= 1) document.getElementById('coins').src="img/coins/coins_1.png";
+  else document.getElementById('coins').src="";
   return;
 }
 

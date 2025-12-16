@@ -1,6 +1,6 @@
 function calculateTax(sell_price)
 {
-    if(sell_price >99) tax = Math.round(sell_price * 0.01);
+    if(sell_price >99) tax = Math.round(sell_price * 0.02);
     else tax = 0; 
     console.log(tax);
     return tax;
@@ -8,7 +8,7 @@ function calculateTax(sell_price)
 
 function calculateMargin(buy_price, sell_price)
 {
-    margin = Math.round(sell_price - buy_price - (sell_price * 0.01));
+    margin = Math.round(sell_price - buy_price - (sell_price * 0.02));
     return margin;
 }
 

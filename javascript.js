@@ -77,22 +77,25 @@ function calculate()
 
     if(isNaN(buy_price) || isNaN(sell_price))
     {
+      document.getElementById("break_output").innerHTML = 0;
       document.getElementById("tax_output").innerHTML = 0;
       document.getElementById("margin_output").innerHTML = 0;
       document.getElementById("total_output").innerHTML = 0;
       document.getElementById("roi_output").innerHTML = "0.00%";
     }
     else {
+        breakEven = buy_price + (buy_price * 0.02);
         tax = 0 - calculateTax(sell_price);
         margin = calculateMargin(buy_price, sell_price);
         total = margin * volume;
         roi = calculateROI(margin, buy_price);
 
+        breakEven_str = breakEven.toLocaleString("en-US");
         tax_str = tax.toLocaleString("en-US");
         margin_str = margin.toLocaleString("en-US");
         total_str = total.toLocaleString("en-US"); 
         
-
+        document.getElementById("break_output").innerHTML = breakEven_str;
         document.getElementById("tax_output").innerHTML = tax_str;
         document.getElementById("margin_output").innerHTML = margin_str;
         document.getElementById("total_output").innerHTML = total_str;

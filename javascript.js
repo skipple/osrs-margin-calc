@@ -94,6 +94,9 @@ function calculate() {
     document.getElementById("break_output").innerHTML =
         breakEven ? breakEven.toLocaleString("en-US") : 0;
 
+    // Calculate target prices for different returns
+    calculateTargetPrices(buy_price, volume);
+
     // If sell price is missing, stop here
     if (isNaN(sell_price)) {
         document.getElementById("tax_output").innerHTML = 0;
@@ -114,4 +117,48 @@ function calculate() {
     document.getElementById("roi_output").innerHTML = roi;
 
     setCoinImage(total);
+}
+
+function calculateTargetPrices(buy_price, volume) {
+    const returnPercentages = [1, 2, 5];
+    
+    if (isNaN(buy_price) || buy_price <= 0) {
+        returnPercentages.forEach(ret => {
+            document.getElementById(`target_${ret}`).innerHTML = 0;
+            document.getElementById(`profit_${ret}`).innerHTML = 0;
+            document.getElementById(`total_profit_${ret}`).innerHTML = 0;
+        });
+        return;
+    }
+
+    returnPercentages.forEach(ret => {
+        // Calculate target sell price for desired ROI
+        // ROI = (margin / buy_price) * 100
+        // We want: margin = (buy_price * ROI) / 100
+        // margin = sell_price - buy_price - tax
+        // So: sell_price = buy_price + margin + tax
+        
+        let targetSellPrice = Math.round(buy_price * (1 + ret / 100));
+        
+        // Adjust for tax to achieve desired ROI
+        let attempts = 0;
+        while (attempts < 100) {
+            const tax = calculateTax(targetSellPrice);
+            const margin = targetSellPrice - buy_price - tax;
+            const roi = (margin / buy_price) * 100;
+            
+            if (roi >= ret) {
+                break;
+            }
+            targetSellPrice++;
+            attempts++;
+        }
+
+        const profitPerUnit = calculateMargin(buy_price, targetSellPrice);
+        const totalProfit = profitPerUnit * (volume || 1);
+
+        document.getElementById(`target_${ret}`).innerHTML = targetSellPrice.toLocaleString("en-US");
+        document.getElementById(`profit_${ret}`).innerHTML = profitPerUnit.toLocaleString("en-US");
+        document.getElementById(`total_profit_${ret}`).innerHTML = totalProfit.toLocaleString("en-US");
+    });
 }

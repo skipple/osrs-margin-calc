@@ -1,3 +1,90 @@
+// Fuzzy search algorithm
+function fuzzyMatch(pattern, str) {
+    const patternLower = pattern.toLowerCase();
+    const strLower = str.toLowerCase();
+    
+    let patternIdx = 0;
+    let strIdx = 0;
+    let matched = false;
+
+    while (strIdx < strLower.length) {
+        if (patternLower[patternIdx] === strLower[strIdx]) {
+            matched = true;
+            patternIdx++;
+        }
+        if (patternIdx === patternLower.length) {
+            return true;
+        }
+        strIdx++;
+    }
+
+    return false;
+}
+
+// Load GEIDs JSON data
+let geidsData = {};
+
+async function loadGEIDsData() {
+    try {
+        const response = await fetch('GEIDs.json');
+        geidsData = await response.json();
+    } catch (error) {
+        console.error('Error loading GEIDs.json:', error);
+    }
+}
+
+// Search items with fuzzy matching
+function searchItems(query) {
+    if (!query || query.trim() === '') {
+        return [];
+    }
+
+    const results = [];
+    for (const [name, id] of Object.entries(geidsData)) {
+        if (fuzzyMatch(query, name)) {
+            results.push({ name, id });
+        }
+    }
+
+    return results.slice(0, 10); // Return top 10 results
+}
+
+// Fetch prices from OSRS Wiki API
+async function fetchItemPrices(itemId) {
+    try {
+        const response = await fetch(`https://prices.runescape.wiki/api/v1/osrs/latest?id=${itemId}`);
+        const data = await response.json();
+        
+        if (data.data && data.data[itemId]) {
+            const priceData = data.data[itemId];
+            return {
+                low: priceData.low,
+                high: priceData.high
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error('Error fetching prices:', error);
+        return null;
+    }
+}
+
+// Select item from search results
+async function selectItem(name, id) {
+    const prices = await fetchItemPrices(id);
+    
+    if (prices) {
+        document.getElementById('bprice').value = prices.low;
+        document.getElementById('sprice').value = prices.high;
+        calculate();
+    }
+    
+    // Clear search
+    document.getElementById('item-search').value = '';
+    document.getElementById('search-results').innerHTML = '';
+    document.getElementById('search-results').style.display = 'none';
+}
+
 function calculateTax(sell_price) {
     if (sell_price > 99) {
         return Math.round(sell_price * 0.02);
@@ -169,6 +256,35 @@ function calculateTargetPrices(buy_price, volume) {
 
 // Initialize multiplier buttons and keyboard shortcuts
 document.addEventListener('DOMContentLoaded', function() {
+    // Load GEIDs data
+    loadGEIDsData();
+
+    // Set up search functionality
+    const searchInput = document.getElementById('item-search');
+    const searchResults = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', function(e) {
+        const query = e.target.value;
+        const results = searchItems(query);
+
+        if (results.length > 0) {
+            searchResults.innerHTML = results.map(result => 
+                `<div class="search-result-item" onclick="selectItem('${result.name.replace(/'/g, "\\'")}', ${result.id})">${result.name}</div>`
+            ).join('');
+            searchResults.style.display = 'block';
+        } else {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+        }
+    });
+
+    // Close search results when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== searchInput) {
+            searchResults.style.display = 'none';
+        }
+    });
+
     // Set up button click handlers
     const multiplierButtons = document.querySelectorAll('.multiplier-btn');
     multiplierButtons.forEach(btn => {

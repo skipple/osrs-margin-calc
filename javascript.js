@@ -353,8 +353,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentMultiplier = parseInt(inputElement.dataset.multiplier) || 1;
             if (currentMultiplier === multiplier) {
                 inputElement.dataset.multiplier = "1";
+                this.classList.remove('active');
             } else {
                 inputElement.dataset.multiplier = multiplier;
+                this.classList.add('active');
+                // Remove active class from the other button for this input
+                document.querySelectorAll(`[data-input="${inputId}"]`).forEach(otherBtn => {
+                    if (otherBtn !== this) otherBtn.classList.remove('active');
+                });
             }
             
             calculate();
@@ -374,8 +380,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const currentMultiplier = parseInt(this.dataset.multiplier) || 1;
                 if (currentMultiplier === multiplier) {
                     this.dataset.multiplier = "1";
+                    document.querySelectorAll(`[data-input="${fieldId}"]`).forEach(btn => {
+                        btn.classList.remove('active');
+                    });
                 } else {
                     this.dataset.multiplier = multiplier;
+                    document.querySelectorAll(`[data-input="${fieldId}"]`).forEach(btn => {
+                        if (parseInt(btn.dataset.multiplier) === multiplier) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
                 }
                 
                 calculate();

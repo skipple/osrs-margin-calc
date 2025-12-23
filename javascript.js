@@ -171,6 +171,31 @@ function setCoinImage(total) {
     else img.src = "";
 }
 
+function clearInputs() {
+    // Clear the price inputs
+    document.getElementById('bprice').value = '';
+    document.getElementById('sprice').value = '';
+    
+    // Reset volume to 1
+    document.getElementById('volume').value = '1';
+    
+    // Reset multiplier states for all inputs
+    const inputIds = ['bprice', 'sprice', 'volume'];
+    inputIds.forEach(inputId => {
+        const inputElement = document.getElementById(inputId);
+        inputElement.dataset.multiplier = '1';
+    });
+    
+    // Remove active class from all multiplier buttons
+    const multiplierButtons = document.querySelectorAll('.multiplier-btn');
+    multiplierButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Recalculate to clear outputs
+    calculate();
+}
+
 function calculate() {
     let buy_price = parceLetter(document.getElementById("bprice").value);
     let sell_price = parceLetter(document.getElementById("sprice").value);

@@ -99,6 +99,27 @@ input[type=textbox]:focus {
     color: #1F2937;
 }
 
+.clear-btn {
+    margin-top: 16px;
+    padding: 10px 24px;
+    background-color: #EF4444;
+    border: 2px solid #DC2626;
+    border-radius: 6px;
+    color: #F9FAF8;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clear-btn:hover {
+    background-color: #DC2626;
+}
+
+.clear-btn:active {
+    background-color: #991B1B;
+}
+
 span[type=textbox] {
     margin: 6px;
 }

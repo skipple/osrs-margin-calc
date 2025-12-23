@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentValue = parceLetter(inputElement.value);
             
             if (!isNaN(currentValue) && currentValue > 0) {
-                inputElement.value = (currentValue * multiplier).toLocaleString("en-US");
+                inputElement.value = currentValue * multiplier;
                 calculate();
             }
         });
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const currentValue = parceLetter(this.value);
                 
                 if (!isNaN(currentValue) && currentValue > 0) {
-                    this.value = (currentValue * multiplier).toLocaleString("en-US");
+                    this.value = currentValue * multiplier;
                     calculate();
                 }
             }

@@ -132,13 +132,17 @@ function calculateTargetPrices(buy_price, volume) {
     }
 
     returnPercentages.forEach(ret => {
-        // Calculate target sell price for desired ROI
-        // ROI = (margin / buy_price) * 100
-        // We want: margin = (buy_price * ROI) / 100
-        // margin = sell_price - buy_price - tax
-        // So: sell_price = buy_price + margin + tax
+        // Calculate target sell price for desired ROI, accounting for tax
+        const requiredMargin = (ret / 100) * buy_price;
         
-        let targetSellPrice = Math.round(buy_price * (1 + ret / 100));
+        let targetSellPrice;
+        if (buy_price + requiredMargin <= 99) {
+            // No tax for sell prices <= 99
+            targetSellPrice = Math.round(buy_price + requiredMargin);
+        } else {
+            // Account for 2% tax
+            targetSellPrice = Math.round((buy_price + requiredMargin) / 0.98);
+        }
         
         // Adjust for tax to achieve desired ROI
         let attempts = 0;

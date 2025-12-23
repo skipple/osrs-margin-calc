@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <title>OSRS Margin Calculator</title>
 </head>
+
 <body>
     <div class="header container">
         <img class="coins" src="img/coins.png">
@@ -20,13 +22,8 @@
     <div class="body container">
         <div class="search-section container">
             <div class="search-container">
-                <input 
-                    type="text" 
-                    id="item-search" 
-                    class="item-search-input" 
-                    placeholder="Search items for current wiki value..."
-                    autocomplete="off"
-                >
+                <input type="text" id="item-search" class="item-search-input"
+                    placeholder="Search items for current wiki value..." autocomplete="off">
                 <div id="search-results" class="search-results dropdown"></div>
             </div>
         </div>
@@ -84,52 +81,50 @@
             <div class="field">
                 <span class="outputText">Total: </span>
                 <img class="coins_img" id="coins" src="">
-                <span type="textbox" class="outputResult" id="total_output">0</span> 
+                <span type="textbox" class="outputResult" id="total_output">0</span>
             </div>
         </div>
         <div class="output container">
-            <div class="field">
-                <span class="outputText">Break Even Price:</span>
-                <span type="textbox" class="outputResult" id="break_output">0</span>
+            <div class="table-container">
+                <div class="field">
+                    <span class="outputText">Break Even Price:</span>
+                    <span type="textbox" class="outputResult" id="break_output">0</span>
+                </div>
+                <table class="return-table">
+                    <thead>
+                        <tr>
+                            <th>Return %</th>
+                            <th>Target</th>
+                            <th>Unit Profit</th>
+                            <th>Total Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="return-percentage">1%</td>
+                            <td id="target_1" class="target-price">0</td>
+                            <td id="profit_1" class="profit">0</td>
+                            <td id="total_profit_1" class="total-profit">0</td>
+                        </tr>
+                        <tr>
+                            <td class="return-percentage">2%</td>
+                            <td id="target_2" class="target-price">0</td>
+                            <td id="profit_2" class="profit">0</td>
+                            <td id="total_profit_2" class="total-profit">0</td>
+                        </tr>
+                        <tr>
+                            <td class="return-percentage">5%</td>
+                            <td id="target_5" class="target-price">0</td>
+                            <td id="profit_5" class="profit">0</td>
+                            <td id="total_profit_5" class="total-profit">0</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-        </div>
-
-        <div class="table-container">
-            <h2>Target Price & Profit</h2>
-            <table class="return-table">
-                <thead>
-                    <tr>
-                        <th>Return %</th>
-                        <th>Target Price</th>
-                        <th>Potential Profit (per unit)</th>
-                        <th>Total Profit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1%</td>
-                        <td id="target_1" class="target-price">0</td>
-                        <td id="profit_1" class="profit">0</td>
-                        <td id="total_profit_1" class="total-profit">0</td>
-                    </tr>
-                    <tr>
-                        <td>2%</td>
-                        <td id="target_2" class="target-price">0</td>
-                        <td id="profit_2" class="profit">0</td>
-                        <td id="total_profit_2" class="total-profit">0</td>
-                    </tr>
-                    <tr>
-                        <td>5%</td>
-                        <td id="target_5" class="target-price">0</td>
-                        <td id="profit_5" class="profit">0</td>
-                        <td id="total_profit_5" class="total-profit">0</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 
 </body>
 <script src="javascript.js"></script>
+
 </html>

@@ -308,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 `<div class="search-result-item" data-index="${index}" onclick="selectItem('${result.name.replace(/'/g, "\\'")}', ${result.id})\">${result.name}</div>`
             ).join('');
             searchResults.style.display = 'block';
+            highlightResultItem(0);
         } else {
             searchResults.innerHTML = '';
             searchResults.style.display = 'none';

@@ -380,6 +380,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 calculate();
             }
+            
+            // Handle Enter key to move focus between inputs
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const focusMap = {
+                    'bprice': 'sprice',
+                    'sprice': 'volume',
+                    'volume': 'bprice'
+                };
+                const nextFieldId = focusMap[fieldId];
+                document.getElementById(nextFieldId).focus();
+            }
         });
     });
 });

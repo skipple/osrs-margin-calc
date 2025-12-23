@@ -166,3 +166,40 @@ function calculateTargetPrices(buy_price, volume) {
         document.getElementById(`total_profit_${ret}`).innerHTML = totalProfit.toLocaleString("en-US");
     });
 }
+
+// Initialize multiplier buttons and keyboard shortcuts
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up button click handlers
+    const multiplierButtons = document.querySelectorAll('.multiplier-btn');
+    multiplierButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const inputId = this.dataset.input;
+            const multiplier = parseInt(this.dataset.multiplier);
+            const inputElement = document.getElementById(inputId);
+            const currentValue = parceLetter(inputElement.value);
+            
+            if (!isNaN(currentValue) && currentValue > 0) {
+                inputElement.value = (currentValue * multiplier).toLocaleString("en-US");
+                calculate();
+            }
+        });
+    });
+
+    // Set up keyboard shortcuts for k and m keys
+    const inputFields = ['bprice', 'sprice', 'volume'];
+    inputFields.forEach(fieldId => {
+        const inputElement = document.getElementById(fieldId);
+        inputElement.addEventListener('keydown', function(e) {
+            if (e.key.toLowerCase() === 'k' || e.key.toLowerCase() === 'm') {
+                e.preventDefault();
+                const multiplier = e.key.toLowerCase() === 'k' ? 1000 : 1000000;
+                const currentValue = parceLetter(this.value);
+                
+                if (!isNaN(currentValue) && currentValue > 0) {
+                    this.value = (currentValue * multiplier).toLocaleString("en-US");
+                    calculate();
+                }
+            }
+        });
+    });
+});

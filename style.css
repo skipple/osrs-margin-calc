@@ -60,6 +60,39 @@ input[type=textbox]:focus {
     outline: none;
 }
 
+.input-group {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    width: 60%;
+}
+
+.input-group input[type=textbox] {
+    width: 100%;
+    margin: 6px 0;
+}
+
+.multiplier-btn {
+    padding: 8px 12px;
+    background-color: #374151;
+    border: 2px solid #F9FAF8;
+    border-radius: 6px;
+    color: #E5E7EB;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-width: 40px;
+}
+
+.multiplier-btn:hover {
+    background-color: #4B5563;
+}
+
+.multiplier-btn:active {
+    background-color: #5d6e85;
+}
+
 span[type=textbox] {
     margin: 6px;
 }

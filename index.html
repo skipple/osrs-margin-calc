@@ -21,17 +21,29 @@
         <div class="input container">
             <div class="field">
                 <span class="buy input text">Buy Price:</span>
-                <input type="textbox" oninput="calculate()" id="bprice">
+                <div class="input-group">
+                    <input type="textbox" oninput="calculate()" id="bprice">
+                    <button class="multiplier-btn" data-input="bprice" data-multiplier="1000">k</button>
+                    <button class="multiplier-btn" data-input="bprice" data-multiplier="1000000">m</button>
+                </div>
             </div>
 
             <div class="field">
                 <span class="sell input text">Sell Price:</span>
-                <input type="textbox" oninput="calculate()" id="sprice">
+                <div class="input-group">
+                    <input type="textbox" oninput="calculate()" id="sprice">
+                    <button class="multiplier-btn" data-input="sprice" data-multiplier="1000">k</button>
+                    <button class="multiplier-btn" data-input="sprice" data-multiplier="1000000">m</button>
+                </div>
             </div>
 
             <div class="field">
                 <span class="volume input text">Volume:</span>
-                <input type="textbox" oninput="calculate()" id="volume" value="1">
+                <div class="input-group">
+                    <input type="textbox" oninput="calculate()" id="volume" value="1">
+                    <button class="multiplier-btn" data-input="volume" data-multiplier="1000">k</button>
+                    <button class="multiplier-btn" data-input="volume" data-multiplier="1000000">m</button>
+                </div>
             </div>
         </div>
 

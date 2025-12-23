@@ -172,9 +172,18 @@ function setCoinImage(total) {
 }
 
 function calculate() {
-    const buy_price = parceLetter(document.getElementById("bprice").value);
-    const sell_price = parceLetter(document.getElementById("sprice").value);
-    const volume = parceLetter(document.getElementById("volume").value);
+    let buy_price = parceLetter(document.getElementById("bprice").value);
+    let sell_price = parceLetter(document.getElementById("sprice").value);
+    let volume = parceLetter(document.getElementById("volume").value);
+
+    // Apply multipliers if set
+    const buyMultiplier = parseInt(document.getElementById("bprice").dataset.multiplier) || 1;
+    const sellMultiplier = parseInt(document.getElementById("sprice").dataset.multiplier) || 1;
+    const volumeMultiplier = parseInt(document.getElementById("volume").dataset.multiplier) || 1;
+
+    buy_price *= buyMultiplier;
+    sell_price *= sellMultiplier;
+    volume *= volumeMultiplier;
 
     // Breakeven ONLY needs buy price
     const breakEven = calculateBreakEven(buy_price);
@@ -339,12 +348,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const inputId = this.dataset.input;
             const multiplier = parseInt(this.dataset.multiplier);
             const inputElement = document.getElementById(inputId);
-            const currentValue = parceLetter(inputElement.value);
             
-            if (!isNaN(currentValue) && currentValue > 0) {
-                inputElement.value = currentValue * multiplier;
-                calculate();
+            // Toggle multiplier - if same multiplier is clicked again, remove it
+            const currentMultiplier = parseInt(inputElement.dataset.multiplier) || 1;
+            if (currentMultiplier === multiplier) {
+                inputElement.dataset.multiplier = "1";
+            } else {
+                inputElement.dataset.multiplier = multiplier;
             }
+            
+            calculate();
         });
     });
 
@@ -356,12 +369,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (e.key.toLowerCase() === 'k' || e.key.toLowerCase() === 'm') {
                 e.preventDefault();
                 const multiplier = e.key.toLowerCase() === 'k' ? 1000 : 1000000;
-                const currentValue = parceLetter(this.value);
                 
-                if (!isNaN(currentValue) && currentValue > 0) {
-                    this.value = currentValue * multiplier;
-                    calculate();
+                // Toggle multiplier - if same multiplier is pressed again, remove it
+                const currentMultiplier = parseInt(this.dataset.multiplier) || 1;
+                if (currentMultiplier === multiplier) {
+                    this.dataset.multiplier = "1";
+                } else {
+                    this.dataset.multiplier = multiplier;
                 }
+                
+                calculate();
             }
         });
     });

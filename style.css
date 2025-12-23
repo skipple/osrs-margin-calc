@@ -243,7 +243,8 @@ span[type=textbox] {
     border-bottom: 1px solid #4B5563;
 }
 
-.search-result-item:hover {
+.search-result-item:hover,
+.search-result-item.highlighted {
     background-color: #4B5563;
     color: #10B981;
 }

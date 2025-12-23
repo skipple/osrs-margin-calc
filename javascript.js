@@ -262,19 +262,66 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up search functionality
     const searchInput = document.getElementById('item-search');
     const searchResults = document.getElementById('search-results');
+    let currentSearchResults = [];
+    let selectedResultIndex = -1;
 
-    searchInput.addEventListener('input', function(e) {
-        const query = e.target.value;
-        const results = searchItems(query);
+    function displaySearchResults(results) {
+        currentSearchResults = results;
+        selectedResultIndex = -1;
 
         if (results.length > 0) {
-            searchResults.innerHTML = results.map(result => 
-                `<div class="search-result-item" onclick="selectItem('${result.name.replace(/'/g, "\\'")}', ${result.id})">${result.name}</div>`
+            searchResults.innerHTML = results.map((result, index) => 
+                `<div class="search-result-item" data-index="${index}" onclick="selectItem('${result.name.replace(/'/g, "\\'")}', ${result.id})\">${result.name}</div>`
             ).join('');
             searchResults.style.display = 'block';
         } else {
             searchResults.innerHTML = '';
             searchResults.style.display = 'none';
+        }
+    }
+
+    function highlightResultItem(index) {
+        const items = searchResults.querySelectorAll('.search-result-item');
+        items.forEach(item => item.classList.remove('highlighted'));
+        
+        if (index >= 0 && index < items.length) {
+            items[index].classList.add('highlighted');
+            items[index].scrollIntoView({ block: 'nearest' });
+            selectedResultIndex = index;
+        }
+    }
+
+    searchInput.addEventListener('input', function(e) {
+        const query = e.target.value;
+        const results = searchItems(query);
+        displaySearchResults(results);
+    });
+
+    searchInput.addEventListener('keydown', function(e) {
+        const itemCount = currentSearchResults.length;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (itemCount > 0) {
+                const nextIndex = selectedResultIndex + 1;
+                if (nextIndex < itemCount) {
+                    highlightResultItem(nextIndex);
+                }
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (selectedResultIndex > 0) {
+                highlightResultItem(selectedResultIndex - 1);
+            } else if (selectedResultIndex === 0) {
+                highlightResultItem(-1);
+                selectedResultIndex = -1;
+            }
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedResultIndex >= 0 && selectedResultIndex < currentSearchResults.length) {
+                const selected = currentSearchResults[selectedResultIndex];
+                selectItem(selected.name, selected.id);
+            }
         }
     });
 

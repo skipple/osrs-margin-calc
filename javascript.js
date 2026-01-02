@@ -86,9 +86,7 @@ async function selectItem(name, id) {
 }
 
 function calculateTax(sell_price) {
-    if (sell_price > 99) {
-        return Math.round(sell_price * 0.02);
-    }
+    return Math.floor(sell_price * 0.02);
     return 0;
 }
 
